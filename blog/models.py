@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib import admin
 # Create your models here.
 
 class Blog(models.Model):
@@ -9,10 +9,15 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='images/')
 
     def __str__(self):
-        return '{} {}'.format(self.title, self.image)
+        return self.title
 
     def summary(self):
         return self.body[:100]
 
     def pub_date_pretty(self):
         return self.pub_date.strftime('%b %e %Y')
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display= ('title', 'pub_date', 'image')
+
+
